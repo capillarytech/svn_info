@@ -2,7 +2,7 @@
 
 ini_set('memory_limit', '500M');
 
-$file = "dealhunt_verbose_svn_log.xml";
+$file = "svn_log_verbose_to_add.xml";
 
 $file_contents = file_get_contents($file);
 
