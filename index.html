@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Svn info by llabhilash</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Svn info</h1>
+        <p>svn subversion graph stats</p>
+
+        <p class="view"><a href="https://github.com/llabhilash/svn_info">View the Project on GitHub <small>llabhilash/svn_info</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/llabhilash/svn_info/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/llabhilash/svn_info/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/llabhilash/svn_info">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>A web based interface to look at your subversion history.
+Provides the following graphs</p>
+
+<ul>
+<li>Important words used in commits based on term frequency</li>
+<li>Punch card (Day vs Hour of day, cell value = number of commits)</li>
+<li>Monthwise number of commits</li>
+<li>Monthwise files modified</li>
+<li>A co-author graph (People who have worked on similar files more number of times are closer)</li>
+</ul><p>If the user is 'all' at certain path in the repo, the following extra graph is displayed</p>
+
+<ul>
+<li>Pie chart of the contribution by the user</li>
+</ul><h3>Pre-Requisites</h3>
+
+<ul>
+<li>Apache</li>
+<li>PHP</li>
+<li>MYSQL</li>
+<li>Internet access for generating charts</li>
+</ul><h3>How to run:</h3>
+
+<h1>Step1: Populating data</h1>
+
+<ul>
+<li><p>Create a verbose svn log of your repository and call it 'svn_log_verbose_to_add.xml'
+eg: svn log -v --xml &gt; svn_log_verbose_to_add.xml</p></li>
+<li><p>Create a schema in mysql called svn_analysis
+Import the queries in svn_analysis.sql. This will create couple of tables</p></li>
+<li><p>Modify the mysql host, username and password in the file parse.php. The user account used must have write permissions to svn_analysis schema.</p></li>
+<li><p>run parse.php. This will populate the data from svn_log_verbose_to_add.xml to svn_analysis schema. Depending on the number of commits, this might take a while.</p></li>
+</ul><h1>Step2: Running</h1>
+
+<ul>
+<li><p>Modify the mysql host, username and password in the file data/db.php. The user account used must have read permissions to svn_analysis schema created.</p></li>
+<li><p>Whole folder of svn_analysis should be under doc root for apache. Create an alias in apache to point /svn_analysis to this directory. index.php is the main page.</p></li>
+</ul><h3>Improvements</h3>
+
+<ul>
+<li>Incremental svn logs addition</li>
+<li>Use a JavaScript based charting library</li>
+<li>Read the db credentials from a properties file for both data store and display</li>
+<li>Use a word cloud for display of commit words. Also use stemmers and a better stop word removal.</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/llabhilash">llabhilash</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
